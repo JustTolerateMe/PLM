@@ -46,7 +46,7 @@ const HISTORICAL_BEST_SELLERS = [
     returnRate: '4.2%',
     revenue: '$1.2M',
     roi: '4.5x',
-    image: '/assets/moodboard_1.png' // reuse asset for now
+    image: '/assets/best_seller_1.png'
   },
   {
     id: 'bs-02',
@@ -57,7 +57,7 @@ const HISTORICAL_BEST_SELLERS = [
     returnRate: '6.1%',
     revenue: '$850k',
     roi: '3.8x',
-    image: '/assets/moodboard_2.png'
+    image: '/assets/best_seller_2.png'
   }
 ];
 
