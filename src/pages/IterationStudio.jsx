@@ -37,6 +37,18 @@ const IterationStudio = () => {
     }
   };
 
+  const variations = selectedBestSeller.id === 'bs-01' ? [
+    { id: 'var-1', name: 'Resort Collar Short Sleeve', image: '/assets/var_photo_shirt_1.png', features: ['Relaxed Fit', 'Open Collar', 'Breathable'] },
+    { id: 'var-2', name: 'Mandarin Collar Tunic', image: '/assets/var_photo_shirt_2.png', features: ['Long Sleeve', 'Banded Collar', 'Extended Length'] },
+    { id: 'var-3', name: 'Utility Overshirt', image: '/assets/var_photo_shirt_3.png', features: ['Cargo Chest Pockets', 'Heavyweight', 'Outerwear Core'] },
+    { id: 'var-4', name: 'Boxy Cropped Silhouette', image: '/assets/var_photo_shirt_4.png', features: ['Modern Fit', 'Wide Hem', 'Draped Shoulders'] }
+  ] : [
+    { id: 'var-1', name: 'Ultra Wide Leg Cargo', image: '/assets/var_photo_pant_1.png', features: ['Statement Pockets', 'Flowing Drape', 'Tech Nylon'] },
+    { id: 'var-2', name: 'Technical Jogger', image: '/assets/var_photo_pant_2.png', features: ['Ribbed Cuffs', 'Waterproof Zippers', 'Tapered Fit'] },
+    { id: 'var-3', name: 'Cropped Minimalist Pant', image: '/assets/var_photo_pant_3.png', features: ['Hidden Pockets', 'Ankle Length', 'Clean Lines'] },
+    { id: 'var-4', name: 'Tactical Multi-Pocket', image: '/assets/var_photo_pant_4.png', features: ['Reinforced Knees', 'D-Ring Details', 'Heavy Duty'] }
+  ];
+
   return (
     <div className="space-y-6 pb-12 h-full flex flex-col">
       <header className="flex justify-between items-end shrink-0">
@@ -69,67 +81,36 @@ const IterationStudio = () => {
            </div>
         </div>
 
-        {/* Right: AI Generation UI */}
+        {/* Right: AI Inspiration UI */}
         <div className="bg-white rounded-3xl border border-enterprise-gray-200 shadow-xl overflow-hidden flex flex-col">
            <div className="p-6 border-b border-enterprise-gray-100 shrink-0 bg-primary-50/30">
-               <div className="relative">
-                 <textarea 
-                   className="w-full bg-white border border-enterprise-gray-200 rounded-xl p-4 pr-12 text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none shadow-inner"
-                   rows="4"
-                   placeholder="Describe the desired variations. E.g., 'Update this silhouette for the FW26 season using a heavy wool blend and adding functional cargo utility details.'"
-                   value={prompt}
-                   onChange={(e) => setPrompt(e.target.value)}
-                 ></textarea>
-                 <button 
-                   onClick={handleGenerateVariations}
-                   disabled={isGenerating || prompt.length < 5}
-                   className="absolute bottom-4 right-4 h-8 w-8 bg-primary-600 rounded-lg flex items-center justify-center text-white hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
-                 >
-                   <Sparkles className={cn("h-4 w-4", isGenerating && "animate-pulse")} />
-                 </button>
+               <div>
+                 <h3 className="text-sm font-bold text-enterprise-gray-900 mb-1 flex items-center">
+                    <Sparkles className="h-4 w-4 text-primary-600 mr-2" />
+                    AI Predictive Design Inspirations
+                 </h3>
+                 <p className="text-xs text-enterprise-gray-500">
+                    Based on market trends and customer feedback, the AI has generated these photographic references. Designers can use these exact silhouettes for drafting pattern variations.
+                 </p>
                </div>
            </div>
 
            <div className="flex-1 p-6 overflow-y-auto bg-enterprise-gray-50/30">
-              {generatedVariations.length === 0 && !isGenerating && (
-                 <div className="h-full flex flex-col items-center justify-center text-center opacity-50">
-                    <Layers className="h-12 w-12 text-enterprise-gray-300 mb-4" />
-                    <p className="text-sm font-bold text-enterprise-gray-500">Awaiting variation prompt</p>
-                    <p className="text-xs text-enterprise-gray-400 mt-1 max-w-xs">Enter your design updates above to generate flat sketches.</p>
-                 </div>
-              )}
-
-              {isGenerating && (
                  <div className="space-y-4">
-                    {[1, 2, 3].map(i => (
-                       <div key={i} className="h-32 bg-white rounded-xl border border-enterprise-gray-200 animate-pulse flex p-4">
-                          <div className="h-full w-24 bg-enterprise-gray-100 rounded-lg"></div>
-                          <div className="ml-4 flex-1 space-y-3">
-                             <div className="h-4 bg-enterprise-gray-100 rounded w-1/2"></div>
-                             <div className="h-3 bg-enterprise-gray-50 rounded w-full"></div>
-                             <div className="h-3 bg-enterprise-gray-50 rounded w-2/3"></div>
-                          </div>
-                       </div>
-                    ))}
-                 </div>
-              )}
-
-              {generatedVariations.length > 0 && !isGenerating && (
-                 <div className="space-y-4">
-                    <h3 className="text-xs font-bold text-enterprise-gray-500 uppercase tracking-widest mb-4">Generated 2D Flats</h3>
-                    {generatedVariations.map(variation => (
+                    <h3 className="text-xs font-bold text-enterprise-gray-500 uppercase tracking-widest mb-4">Select a Reference Path</h3>
+                    {variations.map(variation => (
                        <div 
                          key={variation.id}
                          onClick={() => setSelectedVariation(variation)}
                          className={cn(
-                           "bg-white rounded-xl border-2 p-4 flex cursor-pointer transition-all hover:shadow-md",
-                           selectedVariation?.id === variation.id ? "border-primary-500 ring-4 ring-primary-50 shadow-lg" : "border-enterprise-gray-100 hover:border-primary-200"
+                           "bg-white rounded-xl border-2 p-4 flex cursor-pointer transition-all hover:shadow-md group",
+                           selectedVariation?.id === variation.id ? "border-primary-500 ring-4 ring-primary-50 shadow-lg" : "border-enterprise-gray-100 hover:border-primary-300"
                          )}
                        >
-                          <div className="h-24 w-24 rounded-lg bg-enterprise-gray-50 border border-enterprise-gray-100 flex-shrink-0 flex items-center justify-center overflow-hidden grayscale contrast-150">
-                             <img src={variation.image} alt="Flat Sketch" className="opacity-70 mix-blend-multiply" />
+                          <div className="h-28 w-28 rounded-lg bg-enterprise-gray-50 border border-enterprise-gray-100 flex-shrink-0 overflow-hidden relative">
+                             <img src={variation.image} alt="Photographic Variation" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                           </div>
-                          <div className="ml-5 flex-1">
+                          <div className="ml-5 flex-1 flex flex-col justify-center">
                              <h4 className="font-bold text-enterprise-gray-900 mb-2">{variation.name}</h4>
                              <ul className="space-y-1">
                                 {variation.features.map((f, i) => (
@@ -142,16 +123,15 @@ const IterationStudio = () => {
                        </div>
                     ))}
                  </div>
-              )}
            </div>
 
            <div className="p-6 bg-white border-t border-enterprise-gray-100 shrink-0">
                <button 
                  onClick={handleCreateProject}
                  disabled={!selectedVariation}
-                 className="w-full py-4 bg-enterprise-gray-900 text-white rounded-xl text-sm font-bold flex items-center justify-center hover:bg-enterprise-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all uppercase tracking-widest shadow-xl"
+                 className="w-full py-4 bg-enterprise-gray-900 text-white rounded-xl text-sm font-bold flex items-center justify-center hover:bg-enterprise-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all uppercase tracking-widest shadow-xl group"
                >
-                 Generate 3D Block & Tech Pack <MoveRight className="ml-3 h-5 w-5" />
+                 Confirm Reference for Sketching & 3D <MoveRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                </button>
            </div>
         </div>
