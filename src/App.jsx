@@ -11,7 +11,6 @@ import Sampling from './pages/Sampling.jsx';
 import Costing from './pages/Costing.jsx';
 import VendorManagement from './pages/VendorManagement.jsx';
 import CriticalPath from './pages/CriticalPath.jsx';
-import CriticalPath from './pages/CriticalPath.jsx';
 import Reports from './pages/Reports.jsx';
 import BestSellers from './pages/BestSellers.jsx';
 import IterationStudio from './pages/IterationStudio.jsx';

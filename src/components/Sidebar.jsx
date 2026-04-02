@@ -12,7 +12,6 @@ import {
   Calendar, 
   BarChart3,
   Settings,
-  Settings,
   HelpCircle,
   FileText,
   Star
