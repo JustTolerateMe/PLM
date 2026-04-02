@@ -45,18 +45,18 @@ const Sidebar = () => {
   const { activeModule, setActiveModule } = usePLM();
 
   const menuItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    // { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'projects', label: 'Projects / Seasons', icon: Layers },
     { id: 'intake', label: 'AI Brief Intake', icon: Sparkles },
     { id: 'trend', label: 'Trend Research', icon: Search },
     { id: 'planning', label: 'Collection Planning', icon: ClipboardList },
     { id: 'techpack', label: 'Tech Packs', icon: FileText },
     { id: 'digital', label: 'Digital Design', icon: Scissors },
-    { id: 'sampling', label: 'Sampling', icon: Box },
-    { id: 'costing', label: 'Costing', icon: DollarSign },
-    { id: 'vendors', label: 'Vendor Management', icon: Truck },
-    { id: 'critical-path', label: 'Critical Path', icon: Calendar },
-    { id: 'reports', label: 'Reports', icon: BarChart3 },
+    // { id: 'sampling', label: 'Sampling', icon: Box },
+    // { id: 'costing', label: 'Costing', icon: DollarSign },
+    // { id: 'vendors', label: 'Vendor Management', icon: Truck },
+    // { id: 'critical-path', label: 'Critical Path', icon: Calendar },
+    // { id: 'reports', label: 'Reports', icon: BarChart3 },
   ];
 
   return (

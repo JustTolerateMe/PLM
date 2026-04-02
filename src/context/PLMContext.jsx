@@ -39,7 +39,7 @@ const MOCK_PROJECTS = [
 export const PLMProvider = ({ children }) => {
   const [projects, setProjects] = useState(MOCK_PROJECTS);
   const [currentProjectId, setCurrentProjectId] = useState(MOCK_PROJECTS[0].id);
-  const [activeModule, setActiveModule] = useState('dashboard');
+  const [activeModule, setActiveModule] = useState('projects');
   const [isAIGenerating, setIsAIGenerating] = useState(false);
 
   const currentProject = projects.find(p => p.id === currentProjectId);
