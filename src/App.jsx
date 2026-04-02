@@ -11,7 +11,10 @@ import Sampling from './pages/Sampling.jsx';
 import Costing from './pages/Costing.jsx';
 import VendorManagement from './pages/VendorManagement.jsx';
 import CriticalPath from './pages/CriticalPath.jsx';
+import CriticalPath from './pages/CriticalPath.jsx';
 import Reports from './pages/Reports.jsx';
+import BestSellers from './pages/BestSellers.jsx';
+import IterationStudio from './pages/IterationStudio.jsx';
 import { usePLM } from './context/PLMContext.jsx';
 
 function App() {
@@ -21,6 +24,8 @@ function App() {
     switch (activeModule) {
       case 'dashboard': return <Dashboard />;
       case 'projects': return <Projects />;
+      case 'best-sellers': return <BestSellers />;
+      case 'iteration': return <IterationStudio />;
       case 'intake': return <AIBriefIntake />;
       case 'trend': return <TrendResearch />;
       case 'planning': return <CollectionPlanning />;

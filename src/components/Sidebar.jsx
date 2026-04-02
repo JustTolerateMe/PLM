@@ -12,8 +12,10 @@ import {
   Calendar, 
   BarChart3,
   Settings,
+  Settings,
   HelpCircle,
-  FileText
+  FileText,
+  Star
 } from 'lucide-react';
 import { usePLM } from '../context/PLMContext.jsx';
 import { clsx } from 'clsx';
@@ -47,6 +49,7 @@ const Sidebar = () => {
   const menuItems = [
     // { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'projects', label: 'Projects / Seasons', icon: Layers },
+    { id: 'best-sellers', label: 'Best Sellers Vault', icon: Star },
     { id: 'intake', label: 'AI Brief Intake', icon: Sparkles },
     { id: 'trend', label: 'Trend Research', icon: Search },
     { id: 'planning', label: 'Collection Planning', icon: ClipboardList },

@@ -36,11 +36,37 @@ const MOCK_PROJECTS = [
   }
 ];
 
+const HISTORICAL_BEST_SELLERS = [
+  {
+    id: 'bs-01',
+    name: 'The Essential Linen Shirt',
+    category: 'Tops',
+    originalSeason: 'SS25',
+    sellThrough: '92%',
+    returnRate: '4.2%',
+    revenue: '$1.2M',
+    roi: '4.5x',
+    image: '/assets/moodboard_1.png' // reuse asset for now
+  },
+  {
+    id: 'bs-02',
+    name: 'Utility Cargo Pant',
+    category: 'Bottoms',
+    originalSeason: 'FW25',
+    sellThrough: '88%',
+    returnRate: '6.1%',
+    revenue: '$850k',
+    roi: '3.8x',
+    image: '/assets/moodboard_2.png'
+  }
+];
+
 export const PLMProvider = ({ children }) => {
   const [projects, setProjects] = useState(MOCK_PROJECTS);
   const [currentProjectId, setCurrentProjectId] = useState(MOCK_PROJECTS[0].id);
   const [activeModule, setActiveModule] = useState('projects');
   const [isAIGenerating, setIsAIGenerating] = useState(false);
+  const [selectedBestSeller, setSelectedBestSeller] = useState(null);
 
   const currentProject = projects.find(p => p.id === currentProjectId);
 
@@ -72,6 +98,41 @@ export const PLMProvider = ({ children }) => {
     }, 2500);
   }, []);
 
+  const initiateVariation = (bestSellerId) => {
+    const bs = HISTORICAL_BEST_SELLERS.find(b => b.id === bestSellerId);
+    setSelectedBestSeller(bs);
+    setActiveModule('iteration');
+  };
+
+  const generate3DFromVariation = (variationData) => {
+    setIsAIGenerating(true);
+    setTimeout(() => {
+      const newProjectId = `pr-var-${Date.now()}`;
+      const newProject = {
+        id: newProjectId,
+        name: `${selectedBestSeller.name} - Variation`,
+        season: 'FW26',
+        status: 'Development',
+        progress: 30,
+        modules: {
+          trend: 'Completed',
+          planning: 'Completed',
+          techpack: 'In Progress',
+          digital: 'Completed',
+        },
+        styles: [
+          { id: `st-var-${Date.now()}`, name: variationData.name || 'New Style', category: selectedBestSeller.category, price: '$110', status: 'Digital 3D' }
+        ]
+      };
+      
+      setProjects(prev => [newProject, ...prev]);
+      setCurrentProjectId(newProjectId);
+      setActiveModule('digital');
+      setIsAIGenerating(false);
+      setSelectedBestSeller(null);
+    }, 3000);
+  };
+
   const value = {
     projects,
     currentProject,
@@ -80,7 +141,11 @@ export const PLMProvider = ({ children }) => {
     currentProjectId,
     setCurrentProjectId,
     createProjectFromAI,
-    isAIGenerating
+    isAIGenerating,
+    bestSellers: HISTORICAL_BEST_SELLERS,
+    selectedBestSeller,
+    initiateVariation,
+    generate3DFromVariation
   };
 
   return <PLMContext.Provider value={value}>{children}</PLMContext.Provider>;
